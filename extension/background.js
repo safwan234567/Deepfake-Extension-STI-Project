@@ -7,6 +7,10 @@ chrome.tabs.onUpdated.addListener(
         message: 'URL Changed!',
         url: changeInfo.url
       })
+      value = { url: changeInfo.url };
+      chrome.storage.local.set({"url": value}, function() {
+        console.log('URL is set to ' + changeInfo.url);
+      });
     }
   }
 );
