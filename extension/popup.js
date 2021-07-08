@@ -24,6 +24,14 @@ click.addEventListener("click", async () => {
   });
 });
 
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    // listen for messages sent from background.js
+    if (request.message === 'URL Changed!') {
+      document.getElementById("url").innerHTML = request.url;
+    }
+});
+
 // The body of this function will be executed as a content script inside the
 // current page
 function setPageBackgroundColor() {
