@@ -8,7 +8,7 @@ chrome.tabs.onUpdated.addListener(
         url: changeInfo.url
       })
       value = { url: changeInfo.url };
-      chrome.storage.local.set({"url": value}, function() {
+      chrome.storage.local.set({"dfe": { url: changeInfo.url }}, function() {
         console.log('URL is set to ' + changeInfo.url);
       });
     }
