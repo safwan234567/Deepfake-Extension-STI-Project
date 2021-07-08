@@ -14,3 +14,11 @@ chrome.tabs.onUpdated.addListener(
     }
   }
 );
+
+chrome.action.onClicked.addListener(
+  function() {
+    chrome.tabs.sendMessage( tabId, {
+      message: 'open'
+    });
+  }
+);

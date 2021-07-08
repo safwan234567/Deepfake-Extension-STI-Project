@@ -25,17 +25,16 @@ var click = document.getElementById("button");
 // });
 
 
-click.addEventListener("click", async () => {
-  chrome.storage.local.get(["dfe"], (result) => {
-    document.getElementById("url").innerHTML = result.dfe.url;
-  });
+chrome.storage.local.get(["dfe"], (result) => {
+  document.getElementById("url").innerHTML = result.dfe.url;
 });
 
 chrome.runtime.onMessage.addListener(
   function (request, sender, sendResponse) {
     // listen for messages sent from background.js
-    // if (request.message === 'URL Changed!') {
-    //   document.getElementById("url").innerHTML = request.url;
-    // }
-    document.getElementById("url").innerHTML = request;
+    if (request.message === 'open') {
+      chrome.storage.local.get(["dfe"], (result) => {
+        document.getElementById("url").innerHTML = result.dfe.url;
+      });
+    }
   });
