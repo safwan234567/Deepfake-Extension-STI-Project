@@ -1,8 +1,10 @@
-<div id="dfe" style="position: fixed; top: 20em; right: 1em; z-index: 9; background-color: #f1f1f1; text-align: center; border: 1px solid #d3d3d3;">
+    <div id="dfe" style="position: fixed; top: 20em; right: 1em; z-index: 9; background-color: #f1f1f1; text-align: center; border: 1px solid #d3d3d3;">
     <div id="dfeheader" style="padding: 10px; cursor: move; z-index: 10; background-color: #2196F3; color: #fff;">
-        <p>yo</p>
+        <!--<p id="DetectedStatus">Getting Result...</p>-->
+        <button id="button1" onclick="getLocalStorage();">Get Result</button>
+        <p id="theResult"></p>
     </div>
-    <p>hi</p>
+    <p>Deepware</p>
 </div>
 
 
@@ -61,6 +63,7 @@
         document.getElementById("mySidepanel").style.width = "0";
     }
 </script>
+<script src="overlay.js"></script>
 
 </body>
 
