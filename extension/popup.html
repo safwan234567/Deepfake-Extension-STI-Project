@@ -3,14 +3,34 @@
 
 <head>
   <!-- <link rel="stylesheet" href="button.css"> -->
+  <style>
+    body {
+      background-color: #202124;
+    }
+
+    h2, p {
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
-  <div style="width: 200px; height: 200px;">
+  <div style="display: inline-block; vertical-align: top;">
+    <img src="images/get_started32.png">
+  </div>
+  <div style="display: inline-block;">
+    <h2 style="font-size: medium; margin: 0; margin-top: 5px;">DeepFake Detector</h2>
+  </div>
+  <div style="width: auto; height: auto;">
     <p id="url">URL</p>
-    <button id="button" onclick="createTab();">Check For Deep Fake</button>
-    <p id="click"></p>
-    <p id="Detector">Detector Used: Deepware</p>
+    <div>
+      <p id="DeepFakeResult"></p>
+      <p id="DetectorDeepware"></p>
+    </div>
+    <div>
+      <p id="DeepFakeResult1"></p>
+      <p id="DetectorAvatarify"></p>
+    </div>
   </div>
 </body>
 <script src="popup.js"></script>

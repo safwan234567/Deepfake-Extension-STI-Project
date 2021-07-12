@@ -51,8 +51,10 @@ chrome.tabs.query({
 
 		function displayResult() {
 			console.log(result_array);
+			console.log(result_array.results.avatarify.detected);
 			if (result_array.results.deepware.detected == true) {
-				document.getElementById("click").innerHTML = "DeepFaked: True";
+				document.getElementById("DeepFakeResult").innerHTML = "DeepFaked Result (Deep): True <br> Score: " + result_array.results.deepware.score;
+				document.getElementById("DetectorDeepware").innerHTML = "Detector Used: Deepware";
 				chrome.storage.sync.set({
 					'DetectedStatus': result_array.results.deepware.detected
 
@@ -60,9 +62,32 @@ chrome.tabs.query({
 					console.log('Settings saved');
 				});
 			} else if (result_array.results.deepware.detected == false) {
-				document.getElementById("click").innerHTML = "DeepFaked: False";
+				document.getElementById("DeepFakeResult").innerHTML = "DeepFaked Result (Deep): False <br> Score:" + result_array.results.deepware.score;
+				document.getElementById("DetectorDeepware").innerHTML = "Detector Used: Deepware";
 				chrome.storage.sync.set({
 					'DetectedStatus': result_array.results.deepware.detected
+				}, function () {
+					console.log('Settings saved');
+				});
+
+			}
+			//avatarify
+			if (result_array.results.avatarify.detected == true) {
+				document.getElementById("DeepFakeResult1").innerHTML = "DeepFaked Result (Ava): True <br> Score: " + result_array.results.deepware.score;
+				document.getElementById("DetectorAvatarify").innerHTML = "Detector Used: Avatarify";
+				chrome.storage.sync.set({
+					'DetectedStatus': result_array.results.deepware.detected
+
+				}, function () {
+					console.log('Settings saved');
+				});
+			}
+			else if (result_array.results.avatarify.detected == false) {
+				document.getElementById("DeepFakeResult1").innerHTML = "DeepFaked Result (Ava): False <br> Score: " + result_array.results.deepware.score;
+				document.getElementById("DetectorAvatarify").innerHTML = "Detector Used: Avatarify";
+				chrome.storage.sync.set({
+					'DetectedStatus': result_array.results.deepware.detected
+
 				}, function () {
 					console.log('Settings saved');
 				});
