@@ -55,61 +55,32 @@ chrome.tabs.query({
 			if (result_array.results.deepware.detected == true) {
 				document.getElementById("DeepFakeResult").innerHTML = "DeepFaked Result (Deep): True <br> Score: " + result_array.results.deepware.score;
 				document.getElementById("DetectorDeepware").innerHTML = "Detector Used: Deepware";
-				chrome.storage.sync.set({
-					'DetectedStatusDeepware': result_array.results.deepware.detected
-
-				}, function () {
-					console.log('Settings saved');
-				});
+				localStorage.setItem("DetectedStatusDeepware", "True");
 			} else if (result_array.results.deepware.detected == false) {
 				document.getElementById("DeepFakeResult").innerHTML = "DeepFaked Result (Deep): False <br> Score:" + result_array.results.deepware.score;
 				document.getElementById("DetectorDeepware").innerHTML = "Detector Used: Deepware";
-				chrome.storage.sync.set({
-					'DetectedStatusDeepware': result_array.results.deepware.detected
-				}, function () {
-					console.log('Settings saved');
-				});
+				localStorage.setItem("DetectedStatusDeepware", "False");
 
 			}
 			//avatarify
 			if (result_array.results.avatarify.detected == true) {
 				document.getElementById("DeepFakeResult1").innerHTML = "DeepFaked Result (Ava): True <br> Score: " + result_array.results.avatarify.score;
 				document.getElementById("DetectorAvatarify").innerHTML = "Detector Used: Avatarify";
-				chrome.storage.sync.set({
-					'DetectedStatusAvatarify': result_array.results.avatarify.detected
-
-				}, function () {
-					console.log('Settings saved');
-				});
+				localStorage.setItem("DetectedStatusAvatarify", "True");
 			} else if (result_array.results.avatarify.detected == false) {
 				document.getElementById("DeepFakeResult1").innerHTML = "DeepFaked Result (Ava): False <br> Score: " + result_array.results.avatarify.score;
 				document.getElementById("DetectorAvatarify").innerHTML = "Detector Used: Avatarify";
-				chrome.storage.sync.set({
-					'DetectedStatusAvatarify': result_array.results.avatarify.detected
-
-				}, function () {
-					console.log('Settings saved');
-				});
+				localStorage.setItem("DetectedStatusAvatarify", "False");
 			}
 			//analyst
 			if (result_array.results.analyst.detected == true) {
 				document.getElementById("DeepFakeResult2").innerHTML = "DeepFaked Result (Ana): True <br> Score: " + result_array.results.analyst.score;
 				document.getElementById("DetectorAnalyst").innerHTML = "Detector Used: Analyst";
-				chrome.storage.sync.set({
-					'DetectedStatusAnalyst': result_array.results.analyst.detected
-
-				}, function () {
-					console.log('Settings saved');
-				});
+				localStorage.setItem("DetectedStatusAnalyst", "True");
 			} else if (result_array.results.analyst.detected == false) {
 				document.getElementById("DeepFakeResult2").innerHTML = "DeepFaked Result (Ana): False <br> Score: " + result_array.results.analyst.score;
 				document.getElementById("DetectorAnalyst").innerHTML = "Detector Used: Analyst";
-				chrome.storage.sync.set({
-					'DetectedStatusAnalyst': result_array.results.analyst.detected
-
-				}, function () {
-					console.log('Settings saved');
-				});
+				localStorage.setItem("DetectedStatusAnalyst", "False");
 			}
 		}
 
