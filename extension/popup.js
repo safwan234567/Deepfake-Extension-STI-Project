@@ -32,7 +32,7 @@ chrome.tabs.query({
 			}
 
 			// Usage!
-			sleep(100).then(() => {
+			sleep(1000).then(() => {
 				// Do something after the sleep!
 				http.open("GET", "https://api.deepware.ai/api/v1/video/report?report-id=" + reportID)
 				http.setRequestHeader("X-Deepware-Authentication", "067c7e83-0036-4c36-9c98-d2613e42b9e5")
