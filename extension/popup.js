@@ -40,6 +40,7 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
 		}
 			
 		http.onload = () => fakeDetection()
+		//window.open("deepfake.html","_blank", "width=400,height=300,0,status=0")
 		
    }
 
