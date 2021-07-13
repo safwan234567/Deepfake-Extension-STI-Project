@@ -5,32 +5,58 @@
   <!-- <link rel="stylesheet" href="button.css"> -->
   <style>
     body {
-      color: #fff;
-  font-size: 0.75rem;
-  letter-spacing: 0.1rem;
-  text-decoration: none;
-  box-sizing: border-box;
-  background: linear-gradient(90deg, #383838, #202020);
-  background-size: 400%;
-  border-radius: 30px;
-  border: none;
-  z-index: 1;
+      background-color: #202124;
+    }
 
-    h2, p {
-      color: #ff7f50;
+    h2,
+    p {
+      color: white;
+    }
+
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 20px;
+      height: 20px;
+      -webkit-animation: spin 2s linear infinite;
+      /* Safari */
+      animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
   </style>
 </head>
 
 <body>
   <div style="display: inline-block; vertical-align: top;">
-    <img src="images/deepfakedetectlogo.png">
+    <img src="images/get_started32.png">
   </div>
   <div style="display: inline-block;">
-    <h2 style="font-size: medium; margin: 0; margin-top: 5px; color: #ff7f50;">DeepFake Detect</h2>
+    <h2 style="font-size: medium; margin: 0; margin-top: 5px;">DeepFake Detector</h2>
   </div>
   <div style="width: auto; height: auto;">
     <p id="url">URL</p>
+    <div id="loader" class="loader"></div>
     <div>
       <p id="DeepFakeResult"></p>
       <p id="DetectorDeepware"></p>
