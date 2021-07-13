@@ -32,7 +32,7 @@ chrome.tabs.query({
 			}
 
 			// Usage!
-			sleep(1000).then(() => {
+			sleep(100).then(() => {
 				// Do something after the sleep!
 				http.open("GET", "https://api.deepware.ai/api/v1/video/report?report-id=" + reportID)
 				http.setRequestHeader("X-Deepware-Authentication", "067c7e83-0036-4c36-9c98-d2613e42b9e5")
@@ -55,32 +55,67 @@ chrome.tabs.query({
 			if (result_array.results.deepware.detected == true) {
 				document.getElementById("DeepFakeResult").innerHTML = "DeepFaked Result (Deep): True <br> Score: " + result_array.results.deepware.score;
 				document.getElementById("DetectorDeepware").innerHTML = "Detector Used: Deepware";
-				localStorage.setItem("DetectedStatusDeepware", "True");
+				chrome.storage.sync.set({
+					'DetectedStatusDeepware': result_array.results.deepware.detected
+
+				}, function () {
+					console.log('Settings saved');
+					document.getElementById("loader").style.display = "none";
+				});
 			} else if (result_array.results.deepware.detected == false) {
 				document.getElementById("DeepFakeResult").innerHTML = "DeepFaked Result (Deep): False <br> Score:" + result_array.results.deepware.score;
 				document.getElementById("DetectorDeepware").innerHTML = "Detector Used: Deepware";
-				localStorage.setItem("DetectedStatusDeepware", "False");
+				chrome.storage.sync.set({
+					'DetectedStatusDeepware': result_array.results.deepware.detected
+				}, function () {
+					console.log('Settings saved');
+					document.getElementById("loader").style.display = "none";
+				});
 
 			}
 			//avatarify
 			if (result_array.results.avatarify.detected == true) {
 				document.getElementById("DeepFakeResult1").innerHTML = "DeepFaked Result (Ava): True <br> Score: " + result_array.results.avatarify.score;
 				document.getElementById("DetectorAvatarify").innerHTML = "Detector Used: Avatarify";
-				localStorage.setItem("DetectedStatusAvatarify", "True");
+				chrome.storage.sync.set({
+					'DetectedStatusAvatarify': result_array.results.avatarify.detected
+
+				}, function () {
+					console.log('Settings saved');
+					document.getElementById("loader").style.display = "none";
+				});
 			} else if (result_array.results.avatarify.detected == false) {
 				document.getElementById("DeepFakeResult1").innerHTML = "DeepFaked Result (Ava): False <br> Score: " + result_array.results.avatarify.score;
 				document.getElementById("DetectorAvatarify").innerHTML = "Detector Used: Avatarify";
-				localStorage.setItem("DetectedStatusAvatarify", "False");
+				chrome.storage.sync.set({
+					'DetectedStatusAvatarify': result_array.results.avatarify.detected
+
+				}, function () {
+					console.log('Settings saved');
+					document.getElementById("loader").style.display = "none";
+				});
 			}
 			//analyst
 			if (result_array.results.analyst.detected == true) {
 				document.getElementById("DeepFakeResult2").innerHTML = "DeepFaked Result (Ana): True <br> Score: " + result_array.results.analyst.score;
 				document.getElementById("DetectorAnalyst").innerHTML = "Detector Used: Analyst";
-				localStorage.setItem("DetectedStatusAnalyst", "True");
+				chrome.storage.sync.set({
+					'DetectedStatusAnalyst': result_array.results.analyst.detected
+
+				}, function () {
+					console.log('Settings saved');
+					document.getElementById("loader").style.display = "none";
+				});
 			} else if (result_array.results.analyst.detected == false) {
 				document.getElementById("DeepFakeResult2").innerHTML = "DeepFaked Result (Ana): False <br> Score: " + result_array.results.analyst.score;
 				document.getElementById("DetectorAnalyst").innerHTML = "Detector Used: Analyst";
-				localStorage.setItem("DetectedStatusAnalyst", "False");
+				chrome.storage.sync.set({
+					'DetectedStatusAnalyst': result_array.results.analyst.detected
+
+				}, function () {
+					console.log('Settings saved');
+					document.getElementById("loader").style.display = "none";
+				});
 			}
 		}
 
