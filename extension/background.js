@@ -3,18 +3,7 @@ chrome.tabs.onUpdated.addListener(
     console.log(changeInfo);
     // read changeInfo data and store in local storage
     setTimeout(() => {
-      if (changeInfo.url) {
-        // if link is clicked
-        chrome.tabs.sendMessage(tabId, {
-          message: 'URL Changed!',
-          url: changeInfo.url
-        })
-        value = { url: changeInfo.url };
-        chrome.storage.local.set({ "dfe": { url: changeInfo.url } }, function () {
-          console.log('URL is set to ' + changeInfo.url);
-        });
-      }
-      else if (changeInfo.status == "complete") {
+      if (changeInfo.favIconUrl) {
         // if refreshed
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
           // get current tab's id and url
@@ -32,7 +21,7 @@ chrome.tabs.onUpdated.addListener(
           }
         });
       }
-    }, 200);
+    }, 1000);
   }
 );
 
@@ -44,7 +33,7 @@ chrome.tabs.onActivated.addListener(
       chrome.tabs.get(activeInfo.tabId, function (tab) {
         if (tab.url) {
           chrome.tabs.sendMessage(activeInfo.tabId, {
-            message: 'URL Changed!',
+            message: 'Activated!',
             url: tab.url
           })
           value = { url: tab.url };
