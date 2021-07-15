@@ -1,6 +1,6 @@
 {
-    "name": "Getting Started Example",
-    "description": "Build an Extension!",
+    "name": "Deepfake Detector",
+    "description": "Automatically scan videos for deepfaked content!",
     "version": "1.0",
     "manifest_version": 3,
     "background": {
@@ -10,10 +10,10 @@
       {
         "matches": ["http://*/*", "https://*/*"],
         "js": ["contentscript.js"],
-        "run_at": "document_end"
+        "run_at": "document_start"
       }
     ],
-    "permissions": ["storage", "activeTab", "scripting", "tabs", "background"],
+    "permissions": ["storage", "activeTab", "scripting", "tabs", "background", "webNavigation"],
     "web_accessible_resources": [
       {
         "resources": ["overlay.html"],
