@@ -3,11 +3,29 @@
     <div id="dfeheader" style="padding: 10px; cursor: move; z-index: 10; background-color: #2196F3; color: #fff;">
         <!--<p id="DetectedStatus">Getting Result...</p>-->
         <button id="button1" onClick="(function(){
-            document.getElementById('dfe').style.height = '1000px';
-            document.getElementById('dfe').style.width = '1000px';
+            var overlay = document.getElementById('dfe');
+            var div = document.getElementsByClassName('dfehidden');
+
+            if (overlay.style.height == '1000px') {
+                overlay.style.height = 'unset'; 
+                overlay.style.width = 'unset'; 
+                div[0].style.display = 'none';
+            }
+            else {
+                overlay.style.height = '1000px';
+                overlay.style.width = '1000px';
+                div[0].style.display = 'unset';
+            }
+
             return false;
-        })();return false;">Get Result</button>
+        })();return false;">Expand</button>
         <p id="theResult"></p>
     </div>
-    <p>Deepware</p>
+
+    <div class="dfehidden" style="display: none;">
+        <p id="dfeURL">Current URL</p>
+        <button>Scan current URL</button>
+        <p id="dfeReportId">Report ID</p>
+        <p id="dfeResults">Result</p>
+    </div>
 </div>
