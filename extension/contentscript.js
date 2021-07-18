@@ -59,70 +59,36 @@ chrome.runtime.onMessage.addListener(
 
                         // insert url into overlay
                         document.getElementById("dfeURL").innerHTML = request.url;
-                    }).then(() => {
+                    }).then(async () => {
 
                         // scan url
                         const http = new XMLHttpRequest()
-
                         http.open("GET", "https://api.deepware.ai/api/v1/url/scan?video-url=" + request.url)
-
                         http.setRequestHeader("X-Deepware-Authentication", "067c7e83-0036-4c36-9c98-d2613e42b9e5")
-
                         http.send()
-
-                        http.onload = () => {
-                            document.getElementById("dfeResults").innerHTML = JSON.parse(http.responseText)["report-id"];
-                            var running = true;
-                            while (running) {
-                                setTimeout(() => {
-                                    http.open("GET", "https://api.deepware.ai/api/v1/video/report?report-id=" + report_id)
-
-                                    http.setRequestHeader("X-Deepware-Authentication", "605c27e4-2aaa-44fc-9353-81ce20e17676")
-
-                                    http.send()
-
-                                    http.onload = () => {
-                                        console.log(http.responseText)
-                                        response = JSON.parse(http.responseText)
-                                        document.getElementById("dfeResults").innerHTML = response["results"]["deepware"]["score"];
-                                    }
-                                }, 2500)
-                            };
+                        http.onload = function () {
+                            // display report id when retrieved
+                            report_id = JSON.parse(http.responseText)["report-id"]
+                            document.getElementById("dfeReportId").innerHTML = report_id;
                         }
 
-
-                        // var fakeDetection = function (fakeDetection) {
-
-                        //     const myJSON = http.responseText;
-                        //     http.onload = () => console.log(myJSON)
-                        //     console.log(myJSON)
-                        //     const reportCheck = JSON.parse(myJSON);
-                        //     reportID = reportCheck["report-id"];
-                        //     console.log("Report id = " + reportID)
-                        //     // sleep time expects milliseconds
-                        //     function sleep(time) {
-                        //         return new Promise((resolve) => setTimeout(resolve, time));
-                        //     }
-
-                        //     // Usage!
-                        //     sleep(100).then(() => {
-                        //         // Do something after the sleep!
-                        //         http.open("GET", "https://api.deepware.ai/api/v1/video/report?report-id=" + reportID)
-                        //         http.setRequestHeader("X-Deepware-Authentication", "067c7e83-0036-4c36-9c98-d2613e42b9e5")
-
-                        //         http.onload = function () {
-                        //             result_array = JSON.parse(http.responseText);
-
-                        //             document.getElementById("dfeResults").innerHTML = result_array;
-                        //         }
-
-                        //         http.send()
-                        //         //http.onload = () => console.log(http.responseText)
-
-                        //     });
-                        // }
-
-                        // fakeDetection();
+                        setInterval(() => {
+                            // loop get request until report is complete
+                            report_id = document.getElementById("dfeReportId").innerHTML;
+                            http.open("GET", "https://api.deepware.ai/api/v1/video/report?report-id=" + report_id)
+                            http.setRequestHeader("X-Deepware-Authentication", "605c27e4-2aaa-44fc-9353-81ce20e17676")
+                            http.send()
+                            http.onload = () => {
+                                console.log(http.responseText)
+                                response = JSON.parse(http.responseText)
+                                document.getElementById("dfeStatus").innerHTML = response["completed"];
+                                // document.getElementById("dfeResults").innerHTML = response["results"]["deepware"]["score"];
+                                if (response["completed"] == true) {
+                                    document.getElementById("dfeResults").innerHTML = JSON.stringify(response["results"]);
+                                    clearInterval()
+                                }
+                            }
+                        }, 2500);
                     });
                 }
             }

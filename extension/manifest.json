@@ -14,7 +14,7 @@
       }
     ],
     "permissions": ["storage", "activeTab", "scripting", "tabs", "background", "webNavigation"],
-    "host_permissions": ["https://api.deepware.ai/api/*"],
+    "host_permissions": ["https://api.deepware.ai/api/*", "http://*/*", "https://*/*"],
     "web_accessible_resources": [
       {
         "resources": ["overlay.html"],
