@@ -125,19 +125,21 @@ chrome.runtime.onMessage.addListener(
 
                                     // update progress bar
                                     var elem = document.getElementById("dfeBar");
-                                    var width = 66;
-                                    var id = setInterval(frame, 10);
-                                    function frame() {
-                                        if (width >= 100) {
-                                            clearInterval(id);
-                                            i = 0;
-                                        } else {
-                                            width++;
-                                            elem.style.width = width + "%";
+                                    if (elem.style.width != "100%") {
+                                        var width = 66;
+                                        var id = setInterval(frame, 10);
+                                        function frame() {
+                                            if (width >= 100) {
+                                                clearInterval(id);
+                                                i = 0;
+                                            } else {
+                                                width++;
+                                                elem.style.width = width + "%";
+                                            }
                                         }
+                                        // break
+                                        clearInterval(timerID);
                                     }
-                                    // break
-                                    clearInterval(timerID);
                                 }
                             }
                         }, 2500);
