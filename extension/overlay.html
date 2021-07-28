@@ -1,32 +1,52 @@
 <div id="dfe"
-    style="position: fixed; top: 20em; right: 1em; z-index: 9999; background-color: #f1f1f1; text-align: center; border: 1px solid #d3d3d3; pointer-events: auto;">
-    <div id="dfeheader" style="padding: 10px; cursor: move; z-index: 10; background-color: #2196F3; color: #fff;">
-        <!--<p id="DetectedStatus">Getting Result...</p>-->
-        <button id="button1" onClick="(function(){
+    style="position: fixed; top: 20em; right: 1em; z-index: 9999; background-color: #383838; text-align: center; border: 1px solid #ff7f50; pointer-events: auto; color: white;">
+    <div id="dfeheaderContainer" style="display: flex; width: 100px;">
+        <div id="dfeExpand" style="width: 40px; height: 40px; border: 1px solid #ff7f50; background-color: #383838;"
+            onClick="(function(){
             var overlay = document.getElementById('dfe');
             var div = document.getElementsByClassName('dfehidden');
+            var drag = document.getElementById('dfeheaderContainer');
 
-            if (overlay.style.height == '1000px') {
+            if (overlay.style.height == '400px') {
                 overlay.style.height = 'unset'; 
-                overlay.style.width = 'unset'; 
+                overlay.style.width = 'unset';
+                drag.style.width = 'unset'; 
                 div[0].style.display = 'none';
+                document.getElementById('dfeexpand').innerHTML = '<';
             }
             else {
-                overlay.style.height = '1000px';
-                overlay.style.width = '1000px';
+                overlay.style.height = '400px';
+                overlay.style.width = '500px';
+                drag.style.width = '500px';
                 div[0].style.display = 'unset';
+                document.getElementById('dfeexpand').innerHTML = '>';
             }
 
             return false;
-        })();return false;">Expand</button>
-        <p id="theResult"></p>
+        })();return false;">
+            <div style="display: table; height: 40px; width: 40px; overflow: hidden;">
+                <div style="display: table-cell; vertical-align: middle;">
+                    <p id="dfeexpand" style="color: white; font-size: 20px;">
+                        < </p>
+                </div>
+            </div>
+        </div>
+        <div id="dfeheader"
+            style="padding: 10px; cursor: move; z-index: 10; background-color: #ff7f50; color: #fff; flex-grow: 1">
+        </div>
     </div>
 
-    <div class="dfehidden" style="display: none;">
-        <p id="dfeURL">Current URL</p>
-        <button>Scan current URL</button>
-        <p id="dfeReportId">Report ID</p>
+    <div class="dfehidden" style="background-color: #383838; display: none; font-size: 16px;">
+        <label for="dfeURL">Current URL:</label>
+        <p id="dfeURL"></p> <br>
+        <label for="dfeReportId">Report ID:</label>
+        <p id="dfeReportId"></p> <br>
+        <label for="dfeResults">Result:</label>
+        <p id="dfeResults"></p> <br>
+        <br><br>
+        <div id="barDiv" style="padding-left: 2.5rem; padding-right: 2.5rem;">
+            <div id="dfeBar" style="width: 1%; height: 30px; background-color: #04AA6D;"></div>
+        </div>
         <p id="dfeStatus">Status</p>
-        <p id="dfeResults">Result</p>
     </div>
 </div>

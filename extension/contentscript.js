@@ -61,7 +61,25 @@ chrome.runtime.onMessage.addListener(
                         document.getElementById("dfeURL").innerHTML = request.url;
                     }).then(async () => {
 
-                        // scan url
+                        // update status
+                        document.getElementById("dfeStatus").innerHTML = "Submitting URL";
+
+                        // update progress bar
+                        i = 1;
+                        var elem = document.getElementById("dfeBar");
+                        var width = 1;
+                        var id = setInterval(frame, 10);
+                        function frame() {
+                            if (width >= 33) {
+                                clearInterval(id);
+                                i = 0;
+                            } else {
+                                width++;
+                                elem.style.width = width + "%";
+                            }
+                        }
+
+                        // send url to api
                         const http = new XMLHttpRequest()
                         http.open("GET", "https://api.deepware.ai/api/v1/url/scan?video-url=" + request.url)
                         http.setRequestHeader("X-Deepware-Authentication", "067c7e83-0036-4c36-9c98-d2613e42b9e5")
@@ -70,22 +88,56 @@ chrome.runtime.onMessage.addListener(
                             // display report id when retrieved
                             report_id = JSON.parse(http.responseText)["report-id"]
                             document.getElementById("dfeReportId").innerHTML = report_id;
-                        }
 
-                        setInterval(() => {
+                            //update status
+                            document.getElementById("dfeStatus").innerHTML = "Scanning Report ID";
+
+                            // update progress bar
+                            var elem = document.getElementById("dfeBar");
+                            var id = setInterval(frame, 10);
+                            function frame() {
+                                if (width >= 66) {
+                                    clearInterval(id);
+                                    i = 0;
+                                } else {
+                                    width++;
+                                    elem.style.width = width + "%";
+                                }
+                            }
+                        }
+                    }).then(() => {
+                        var timerID = setInterval(() => {
                             // loop get request until report is complete
                             report_id = document.getElementById("dfeReportId").innerHTML;
+                            const http = new XMLHttpRequest()
                             http.open("GET", "https://api.deepware.ai/api/v1/video/report?report-id=" + report_id)
                             http.setRequestHeader("X-Deepware-Authentication", "605c27e4-2aaa-44fc-9353-81ce20e17676")
                             http.send()
                             http.onload = () => {
-                                console.log(http.responseText)
+
                                 response = JSON.parse(http.responseText)
-                                document.getElementById("dfeStatus").innerHTML = response["completed"];
+                                var completed = response["completed"];
                                 // document.getElementById("dfeResults").innerHTML = response["results"]["deepware"]["score"];
-                                if (response["completed"] == true) {
-                                    document.getElementById("dfeResults").innerHTML = JSON.stringify(response["results"]);
-                                    clearInterval()
+                                if (completed == true) {
+                                    // if report is complete
+                                    document.getElementById("dfeStatus").innerHTML = "Done"; // update status
+                                    document.getElementById("dfeResults").innerHTML = JSON.stringify(response["results"]); // display results
+
+                                    // update progress bar
+                                    var elem = document.getElementById("dfeBar");
+                                    var width = 66;
+                                    var id = setInterval(frame, 10);
+                                    function frame() {
+                                        if (width >= 100) {
+                                            clearInterval(id);
+                                            i = 0;
+                                        } else {
+                                            width++;
+                                            elem.style.width = width + "%";
+                                        }
+                                    }
+                                    // break
+                                    clearInterval(timerID);
                                 }
                             }
                         }, 2500);
