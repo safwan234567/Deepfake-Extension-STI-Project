@@ -13,6 +13,7 @@
                 drag.style.width = 'unset'; 
                 div[0].style.display = 'none';
                 document.getElementById('dfeexpand').innerHTML = '<';
+                document.getElementById('dfeClose').style.display = 'none';
             }
             else {
                 overlay.style.height = '400px';
@@ -20,6 +21,7 @@
                 drag.style.width = '500px';
                 div[0].style.display = 'unset';
                 document.getElementById('dfeexpand').innerHTML = '>';
+                document.getElementById('dfeClose').style.display = 'unset';
             }
 
             return false;
@@ -34,6 +36,18 @@
         <div id="dfeheader"
             style="padding: 10px; cursor: move; z-index: 10; background-color: #ff7f50; color: #fff; flex-grow: 1">
         </div>
+        <div id="dfeClose" style="display: none; width: 40px; height: 40px; border: 1px solid #ff7f50; background-color: #383838;"
+        onClick="(function(){
+        var overlay = document.getElementById('dfe');
+        overlay.remove();
+        })();return false;">
+        <div style="display: table; height: 40px; width: 40px; overflow: hidden;">
+            <div style="display: table-cell; vertical-align: middle;">
+                <p id="dfeclose" style="color: white; font-size: 20px;">
+                    X </p>
+            </div>
+        </div>
+    </div>
     </div>
 
     <div class="dfehidden" style="background-color: #383838; display: none; font-size: 16px;">
@@ -46,7 +60,7 @@
         <p id="dfeReportId"></p> <br>
 
         <label for="dfeResults">Result:</label>
-        <p id="dfeResults"></p> <br><br><br>
+        <table id="dfeResults" style="border: 1px solid gray; margin-left: auto; margin-right: auto;"></table> <br>
         
         <div id="barDiv" style="padding-left: 2.5rem; padding-right: 2.5rem;">
             <div id="dfeBar" style="width: 1%; height: 30px; background-color: #04AA6D;"></div>

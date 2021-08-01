@@ -68,7 +68,9 @@ chrome.runtime.onMessage.addListener(
                         i = 1;
                         var elem = document.getElementById("dfeBar");
                         var width = 1;
-                        var id = setInterval(frame, 10);
+                        if (width != 33) {
+                            var id = setInterval(frame, 10);
+                        }
                         function frame() {
                             if (width >= 33) {
                                 clearInterval(id);
@@ -78,6 +80,7 @@ chrome.runtime.onMessage.addListener(
                                 elem.style.width = width + "%";
                             }
                         }
+
 
                         // send url to api
                         const http = new XMLHttpRequest()
@@ -94,7 +97,9 @@ chrome.runtime.onMessage.addListener(
 
                             // update progress bar
                             var elem = document.getElementById("dfeBar");
-                            var id = setInterval(frame, 10);
+                            if (width != 66) {
+                                var id = setInterval(frame, 10);
+                            }
                             function frame() {
                                 if (width >= 66) {
                                     clearInterval(id);
@@ -121,7 +126,14 @@ chrome.runtime.onMessage.addListener(
                                 if (completed == true) {
                                     // if report is complete
                                     document.getElementById("dfeStatus").innerHTML = "Done"; // update status
-                                    document.getElementById("dfeResults").innerHTML = JSON.stringify(response["results"]); // display results
+
+                                    // build result display table
+                                    results = response["results"];
+                                    display = "<tr><th style='padding: 5px;'><b>Technology</b></th><th style='padding: 5px;'><b>Detected?</b></th><th style='padding: 5px;'><b>Score</b></th></tr>"
+                                    for (const [key, value] of Object.entries(results)) {
+                                        display += "<tr><td>" + key + "</td><td>" + value["detected"] + "</td><td>" + value["score"] + "</td></tr>"
+                                    }
+                                    document.getElementById("dfeResults").innerHTML = display; // insert result table into overlay
 
                                     // update progress bar
                                     var elem = document.getElementById("dfeBar");

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- <link rel="stylesheet" href="button.css"> -->
+  <style>
+    body {
+      color: #fff;
+      font-size: 0.75rem;
+      letter-spacing: 0.1rem;
+      text-decoration: none;
+      box-sizing: border-box;
+      background: linear-gradient(90deg, #383838, #202020);
+      background-size: 400%;
+      border-radius: 30px;
+      border: none;
+      z-index: 1;
+    }
+
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #FF8C00;
+      width: 10px;
+      height: 10px;
+      -webkit-animation: spin 2s linear infinite;
+      /* Safari */
+      animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    h2,
+    p {
+      color: #ff7f50;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="display: inline-block; vertical-align: top;">
+    <img src="images/deepfakedetectlogo.png">
+  </div>
+  <div style="display: inline-block;">
+    <h2 style="font-size: medium; margin: 0; margin-top: 5px; color: #ff7f50;">DeepFake Detect</h2>
+  </div>
+  <div style="width: auto; height: auto;">
+    <p id="url">URL</p>
+    <div id="loader" class="loader"></div>
+    <div>
+      <p id="DeepFakeResult"></p>
+      <p id="DetectorDeepware"></p>
+    </div>
+    <div>
+      <p id="DeepFakeResult1"></p>
+      <p id="DetectorAvatarify"></p>
+    </div>
+    <div>
+      <p id="DeepFakeResult2"></p>
+      <p id="DetectorAnalyst"></p>
+    </div>
+  </div>
+</body>
+<script src="popup.js"></script>
+<!-- Script For Creating New Tab
+  <script type="text/javascript" src="showDeepFakeHtml.js"></script>-->
+
+</html>
