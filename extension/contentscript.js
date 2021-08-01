@@ -122,7 +122,6 @@ chrome.runtime.onMessage.addListener(
 
                                 response = JSON.parse(http.responseText)
                                 var completed = response["completed"];
-                                // document.getElementById("dfeResults").innerHTML = response["results"]["deepware"]["score"];
                                 if (completed == true) {
                                     // if report is complete
                                     document.getElementById("dfeStatus").innerHTML = "Done"; // update status
