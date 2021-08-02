@@ -1,6 +1,81 @@
+a<style>
+    .loader {
+        border: 10px solid #fff;
+        border-radius: 50%;
+        border-top: 10px solid #FF8C00;
+        width: 10px;
+        height: 10px;
+        padding-left: auto;
+        padding-right: auto;
+        -webkit-animation: spin 2s linear infinite;
+        /* Safari */
+        animation: spin 2s linear infinite;
+    }
+
+    .checkmark {
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        -ms-transform: rotate(45deg);
+        /* IE 9 */
+        -webkit-transform: rotate(45deg);
+        /* Chrome, Safari, Opera */
+        transform: rotate(45deg);
+    }
+
+    .checkmark_circle {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        background-color: green;
+        border-radius: 11px;
+        left: 0;
+        top: 0;
+    }
+
+    .checkmark_stem {
+        position: absolute;
+        width: 3px;
+        height: 9px;
+        background-color: #fff;
+        left: 11px;
+        top: 6px;
+    }
+
+    .checkmark_kick {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background-color: #fff;
+        left: 8px;
+        top: 12px;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
 <div id="dfe"
     style="position: fixed; top: 20em; right: 1em; z-index: 9999; background-color: #383838; text-align: center; border: 1px solid #ff7f50; pointer-events: auto; color: white;">
-    <div id="dfeheaderContainer" style="display: flex; width: 100px;">
+    <div id="dfeheaderContainer" style="display: flex; width: 82px;">
         <div id="dfeExpand" style="width: 40px; height: 40px; border: 1px solid #ff7f50; background-color: #383838;"
             onClick="(function(){
             var overlay = document.getElementById('dfe');
@@ -10,7 +85,7 @@
             if (overlay.style.height == '400px') {
                 overlay.style.height = 'unset'; 
                 overlay.style.width = 'unset';
-                drag.style.width = 'unset'; 
+                drag.style.width = '82px'; 
                 div[0].style.display = 'none';
                 document.getElementById('dfeexpand').innerHTML = '<';
                 document.getElementById('dfeClose').style.display = 'none';
@@ -33,26 +108,48 @@
                 </div>
             </div>
         </div>
-        <div id="dfeheader"
-            style="padding: 10px; cursor: move; z-index: 10; background-color: #ff7f50; color: #fff; flex-grow: 1">
+        <div id="dfeheader" style="cursor: move; z-index: 10; background-color: #ff7f50; color: #fff; flex-grow: 1;">
+            <div style="display: table; height: 40px; width: 40px; border: 1px solid #ff7f50; overflow: hidden;">
+                <div id="dfeloaderContainer" style="display: table-cell; vertical-align: middle; text-align: center; padding-left: 4px;">
+                    <!-- Loading icon -->
+                    <div id="dfeloader" class="loader"></div>
+
+                    <!-- When no deepfake detected -->
+                    <span id="dfeCheck" class="checkmark" style="display: none;">
+                        <div class="checkmark_circle"></div>
+                        <div class="checkmark_stem"></div>
+                        <div class="checkmark_kick"></div>
+                    </span>
+
+                    <!-- When deepfake is detected -->
+                    <span id="dfeExclamation" style="display: none; font-size: xx-large; color: red;
+                    text-shadow:
+                    -1px -1px 0 #383838,
+                    1px -1px 0 #383838,
+                    -1px 1px 0 #383838,
+                    1px 1px 0 #383838;">&#33;
+                    </span>
+                </div>
+            </div>
         </div>
-        <div id="dfeClose" style="display: none; width: 40px; height: 40px; border: 1px solid #ff7f50; background-color: #383838;"
-        onClick="(function(){
+        <div id="dfeClose"
+            style="display: none; width: 40px; height: 40px; border: 1px solid #ff7f50; background-color: #383838;"
+            onClick="(function(){
         var overlay = document.getElementById('dfe');
         overlay.remove();
         })();return false;">
-        <div style="display: table; height: 40px; width: 40px; overflow: hidden;">
-            <div style="display: table-cell; vertical-align: middle;">
-                <p id="dfeclose" style="color: white; font-size: 20px;">
-                    X </p>
+            <div style="display: table; height: 40px; width: 40px; overflow: hidden;">
+                <div style="display: table-cell; vertical-align: middle;">
+                    <p id="dfeclose" style="color: white; font-size: 20px;">
+                        X </p>
+                </div>
             </div>
-        </div>                                            
-    </div>
+        </div>
     </div>
 
     <div class="dfehidden" style="background-color: #383838; display: none; font-size: 16px;">
         <br>
-        
+
         <label for="dfeURL">Current URL:</label>
         <p id="dfeURL"></p> <br>
 
@@ -61,7 +158,7 @@
 
         <label for="dfeResults">Result:</label>
         <table id="dfeResults" style="border: 1px solid gray; margin-left: auto; margin-right: auto;"></table> <br>
-        
+
         <div id="barDiv" style="padding-left: 2.5rem; padding-right: 2.5rem;">
             <div id="dfeBar" style="width: 1%; height: 30px; background-color: #04AA6D;"></div>
         </div>

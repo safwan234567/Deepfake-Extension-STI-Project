@@ -129,9 +129,15 @@ chrome.runtime.onMessage.addListener(
                                     // build result display table
                                     results = response["results"];
                                     display = "<tr><th style='padding: 5px;'><b>Technology</b></th><th style='padding: 5px;'><b>Detected?</b></th><th style='padding: 5px;'><b>Score</b></th></tr>"
+                                    finalResult = false // deepfake detected?
                                     for (const [key, value] of Object.entries(results)) {
                                         display += "<tr><td>" + key + "</td><td>" + value["detected"] + "</td><td>" + value["score"] + "</td></tr>"
+                                        console.log(value["detected"])
+                                        if (value["detected"] == true) {
+                                            finalResult = true;
+                                        }
                                     }
+                                    console.log("finalResult: " + finalResult)
                                     document.getElementById("dfeResults").innerHTML = display; // insert result table into overlay
 
                                     // update progress bar
@@ -151,6 +157,19 @@ chrome.runtime.onMessage.addListener(
                                         // break
                                         clearInterval(timerID);
                                     }
+
+                                    // update closed overlay icon
+                                    document.getElementById("dfeloaderContainer").style.paddingLeft = "unset";
+                                    document.getElementById("dfeloader").style.display = "none";
+                                    if (finalResult) {
+                                        // if deepfake is detected
+                                        document.getElementById("dfeExclamation").style.display = "unset";
+                                    }
+                                    else {
+                                        // if no deepfake detected
+                                        document.getElementById("dfeCheck").style.display = "inline-block";
+                                    }
+
                                 }
                             }
                         }, 2500);
