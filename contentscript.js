@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener(
             if ((request.message == "Activated!" && !document.getElementById("dfe")) || request.message == "URL Changed!") {
                 // if tab is clicked and not already generated OR url changes
                 // inject overlay
-                if (request.url.startsWith("https://www.youtube.com/watch?v=") || (request.url.startsWith("https://twitter.com/") && request.url.includes("status"))) {
+                if (request.url.startsWith("https://www.youtube.com/watch?v=") || request.url.startsWith("https://www.facebook.com/watch/?v=") || (request.url.startsWith("https://twitter.com/") && request.url.includes("status"))) {
                     fetch(chrome.runtime.getURL('/overlay.html')).then(r => r.text()).then(html => {
                         document.body.insertAdjacentHTML('beforeend', html);
                         // not using innerHTML as it would break js event listeners of the page
