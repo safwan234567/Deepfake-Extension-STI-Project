@@ -74,9 +74,9 @@ a<style>
 </style>
 
 <div id="dfe"
-    style="position: fixed; top: 20em; right: 1em; z-index: 9999; background-color: #383838; text-align: center; border: 1px solid #ff7f50; pointer-events: auto; color: white;">
+    style="position: fixed; top: 20em; right: 1em; z-index: 9999; background-color: #383838; text-align: center; border: 1px solid #A886F5; pointer-events: auto; color: white;">
     <div id="dfeheaderContainer" style="display: flex; width: 82px;">
-        <div id="dfeExpand" style="width: 40px; height: 40px; border: 1px solid #ff7f50; background-color: #383838;"
+        <div id="dfeExpand" style="width: 40px; height: 40px; border: 1px solid #A886F5; background-color: #383838;"
             onClick="(function(){
             var overlay = document.getElementById('dfe');
             var div = document.getElementsByClassName('dfehidden');
@@ -108,8 +108,8 @@ a<style>
                 </div>
             </div>
         </div>
-        <div id="dfeheader" style="cursor: move; z-index: 10; background-color: #ff7f50; color: #fff; flex-grow: 1;">
-            <div style="display: table; height: 40px; width: 40px; border: 1px solid #ff7f50; overflow: hidden;">
+        <div id="dfeheader" style="cursor: move; z-index: 10; background-color: #A886F5; color: #fff; flex-grow: 1;">
+            <div id="dfeheaderChild" style="display: table; height: 40px; width: 40px; border: 1px solid #A886F5; overflow: hidden;">
                 <div id="dfeloaderContainer" style="display: table-cell; vertical-align: middle; text-align: center; padding-left: 4px;">
                     <!-- Loading icon -->
                     <div id="dfeloader" class="loader"></div>
@@ -133,7 +133,7 @@ a<style>
             </div>
         </div>
         <div id="dfeClose"
-            style="display: none; width: 40px; height: 40px; border: 1px solid #ff7f50; background-color: #383838;"
+            style="display: none; width: 40px; height: 40px; border: 1px solid #A886F5; background-color: #383838;"
             onClick="(function(){
         var overlay = document.getElementById('dfe');
         overlay.remove();
