@@ -11,3 +11,12 @@ We are a group of 4 students researching on Deepfake and the ways to detect it. 
 ## Future Implementations
 - Deployment on mobile devices
 - Support other media platforms
+- Addition of context menu options to extension
+- Deep learning for fake news
+
+## Prototypes
+- Deepo mobile application
+- Deepo desktop application
+- Deepo browser extension
+- Deepo social media
+- Deepo integration with bots
